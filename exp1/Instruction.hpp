@@ -20,6 +20,9 @@ const int FRAME_TYPE_LIST_KEYS = 1;
 const int FRAME_TYPE_GET = 2;
 const int FRAME_TYPE_INSERT = 3;
 const int FRAME_TYPE_DELETE = 4;
+const int FRAME_TYPE_SHUTDOWN = 5;
+const int FRAME_TYPE_SAVE = 6;
+
 struct _frame
 {
     uint16_t _type;
@@ -36,39 +39,47 @@ public:
     string key;
     string val;
 
-    Instruction(_frame* _f) {
+    Instruction(_frame *_f)
+    {
         this->type = _f->_type;
-        this->key = string(_f->_key_buf);
-        this->val = string(_f->_val_buf);
+        if (this->type == FRAME_TYPE_INSERT || this->type == FRAME_TYPE_GET || this->type == FRAME_TYPE_DELETE)
+            this->key = string(_f->_key_buf);
+        if (this->type == FRAME_TYPE_INSERT)
+            this->val = string(_f->_val_buf);
     }
 
-    Instruction() {
+    Instruction()
+    {
         this->type = FRAME_TYPE_UNKNOW;
     }
 
-    Instruction* setType(int _type){
+    Instruction *setType(int _type)
+    {
         this->type = _type;
         return this;
     }
 
-    Instruction* setKey(string key){
+    Instruction *setKey(string key)
+    {
         this->key = key;
         return this;
     }
 
-    Instruction* setVal(string val){
+    Instruction *setVal(string val)
+    {
         this->val = val;
         return this;
-    } 
+    }
 
-    _frame to_frame(){
+    _frame to_frame()
+    {
         _frame _f;
         _f._type = this->type;
-       memcpy(_f._key_buf,this->key.c_str(),this->key.length());
-       memcpy(_f._val_buf,this->val.c_str(),this->val.length());
-       _f._key_length = this->key.length();
-       _f._val_length = this->val.length();
-       return _f;
+        memcpy(_f._key_buf, this->key.c_str(), this->key.length());
+        memcpy(_f._val_buf, this->val.c_str(), this->val.length());
+        _f._key_length = this->key.length();
+        _f._val_length = this->val.length();
+        return _f;
     }
 };
 

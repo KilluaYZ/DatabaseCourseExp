@@ -21,7 +21,7 @@ public:
     }
 
     ~Server(){
-        free(_store);
+        delete _store;
     }
 };
 

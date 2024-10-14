@@ -3,7 +3,6 @@ CXXFLAGS = -fsanitize=address -g
 
 SERVER_SRC = myserver.cpp
 CLIENT_SRC = myclient.cpp 
-SOCKET_SRC = Socket.hpp
 SERVER_EXEC = myserver
 CLIENT_EXEC = myclient
 
