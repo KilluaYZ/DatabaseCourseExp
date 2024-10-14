@@ -145,6 +145,7 @@ public:
       << "insert <key> <value>: \t insert a record." << endl
       << "find <key>: \t\t get value." << endl
       << "delete <key>: \t\t delete the record." << endl
+      << "show: \t\t\t show all records in server." << endl
       << "save: \t\t\t save the records to a file." << endl
       << "quit: \t\t\t quit client." << endl
       << "shutdown: \t\t close the remote server." << endl;
